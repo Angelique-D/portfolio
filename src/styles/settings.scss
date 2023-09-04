@@ -1,0 +1,18 @@
+/**
+ * src/styles/settings.scss
+ *
+ * Configures SASS variables and Vuetify overwrites
+ */
+
+// https://vuetifyjs.com/features/sass-variables/`
+// @use 'vuetify/settings' with (
+//   $color-pack: false
+// );
+
+@import url(https://fonts.bunny.net/css);
+@import url(https://fonts.bunny.net/css?family=almendra-display:400|amita:400|vibur:400);
+
+.v-toolbar-title__placeholder {
+    overflow: visible !important;
+}
+
