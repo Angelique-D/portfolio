@@ -1,5 +1,8 @@
 # essentials
 
+Hi everyone !
+This is my portfolio, he is under construction.
+
 ## Project setup
 
 ```
