@@ -1,6 +1,5 @@
 <script setup>
 import { ref } from 'vue'
-import vuetify from '@/plugins/vuetify';
 
 const listProjects = ref([
   {
@@ -12,9 +11,12 @@ const listProjects = ref([
 </script>
 
 <template>
-    <v-app-bar :elevation="0" :height="100" class="bg-perso">
+    <v-app-bar :elevation="0" :height="120" class="bg-primary">
         <router-link to="/">
-            <v-app-bar-title class="ml-15 title">
+            <v-app-bar-title class="title" :class="{
+                'ml-15': $vuetify.display.smAndUp, 
+                'ml-5' : $vuetify.display.smAndDown
+                }">
                 <p class="firstName">
                     {{ $vuetify.display.smAndDown ? "A" : "Angélique" }}
                 </p> 
@@ -54,7 +56,7 @@ const listProjects = ref([
 
 <style scoped lang="scss">
 @import "../styles/settings.scss";
-.bg-perso {
+.bg-primary {
     background-color: $primary !important;
 }
 a {

@@ -5,7 +5,7 @@ import Header from './components/Header.vue';
 <template>
   <v-app>
     <Header />
-    <div style="margin-top: 100px;">
+    <div style="margin-top: 120px;">
       <router-view />
     </div>
   </v-app>

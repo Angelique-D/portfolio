@@ -17,12 +17,20 @@
     overflow: visible !important;
 }
 
+.v-application {
+    background-color: $primary !important;
+}
+
 * {
     box-sizing: border-box;
 }
 
-.v-application {
-    background-color: $primary !important;
+.flex-end {
+    display: flex;
+    justify-content: flex-end;
 }
+
+
+
 
 
