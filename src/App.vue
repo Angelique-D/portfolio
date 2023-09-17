@@ -1,7 +1,13 @@
+<script setup>
+import Header from './components/Header.vue';
+</script>
+
 <template>
-  <router-view />
+  <v-app>
+    <Header />
+    <div style="margin-top: 100px;">
+      <router-view />
+    </div>
+  </v-app>
 </template>
 
-<script setup>
-  //
-</script>

@@ -10,9 +10,19 @@
 // );
 
 @import url(https://fonts.bunny.net/css);
-@import url(https://fonts.bunny.net/css?family=almendra-display:400|amita:400|vibur:400);
+@import url(https://fonts.bunny.net/css?family=abeezee:400|allura:400|vibur:400);
+@import "./variables.scss";
 
 .v-toolbar-title__placeholder {
     overflow: visible !important;
 }
+
+* {
+    box-sizing: border-box;
+}
+
+.v-application {
+    background-color: $primary !important;
+}
+
 
