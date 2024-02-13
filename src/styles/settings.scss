@@ -17,10 +17,6 @@
     overflow: visible !important;
 }
 
-.v-application {
-    background-color: $primary !important;
-}
-
 * {
     box-sizing: border-box;
 }
@@ -34,6 +30,10 @@ body {
 .flex-end {
     display: flex;
     justify-content: flex-end;
+}
+
+.v-app-bar {
+    background-color: $primary !important;
 }
 
 
