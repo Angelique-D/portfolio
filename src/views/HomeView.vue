@@ -1,6 +1,7 @@
 <script setup>
 import { ref } from 'vue';
 import Navbar from '@/components/Navbar.vue';
+import Footer from '@/components/Footer.vue';
 import { mdiChevronDoubleDown } from '@mdi/js';
 
 const isOpen = ref(false);
@@ -12,32 +13,12 @@ const setIsOpen = () => {
 <template>
   <Navbar />
   <v-container fluid>
-    <div class="notification">
-
-    </div>
     <div class="head">
-      <v-row>
-        <v-col cols="12">
-          <div class="container-wrapper">
-            <p @click="setIsOpen" class="mr-12 flex-end">
-              <span class="point">.</span>
-              <span class="point">.</span>
-              <span class="point">.</span>
-            </p>
-            <div class="description pa-4 mr-12" v-show="isOpen">
-              <p>
-                Recherche activement un stage pour la période du 27 novembre au 22 décembre
-              </p>
-            </div>
-          </div>
-        </v-col>
-      </v-row>
-
       <v-row>
         <v-col cols="5">
           <div style="position: relative;" class="mt-16">
             <h3>Bienvenue,</h3>
-            <h3>Je m'appelle Angélique Didillon</h3>
+            <h3>Je m'appelle <span class="myName">Angélique Didillon</span> </h3>
             <span>Développeuse Web et Web Mobile</span>
           </div>
         </v-col>
@@ -57,40 +38,63 @@ const setIsOpen = () => {
         <v-col cols="5">
           <div style="
             position: relative;
-            z-index: 9999;" class="mt-16">
-            <v-img src="../assets/img/fleur.jpg" contain max-height="300" />
+            z-index: 9999;"
+            class="mt-10"
+          >
+            <p @click="setIsOpen" class="mr-12 flex-end">
+              <span class="point">.</span>
+              <span class="point">.</span>
+              <span class="point">.</span>
+            </p>
+            <v-fade-transition>
+              <div class="description pa-4" v-show="isOpen">
+                <p>
+                  Je travail actuellement sur des projets personnels, si mon profil vous intéresse n'hésitez pas à me contacter
+                </p>
+              </div>
+            </v-fade-transition>
           </div>
         </v-col>
       </v-row>
     </div>
+
     <v-col cols="12" class="mt-16" id="about">
       <div>
         <v-row>
-          <div class="egg"></div>
+          <v-col cols="12" sm="6">
+            <div class="egg"></div>
+            <h5 class="title">À propos de moi</h5>
+          </v-col>
+          <v-col cols="12" sm="6">
+            <v-card
+              class="mt-16"
+              :class="[`elevation-${0}`]"
+            >
+              <div class="top-left corner"></div>
+              <div class="bottom-right corner"></div>
+              <div class="top-left-pink cornerPink"></div>
+              <div class="bottom-right-pink cornerPink"></div>
+              <v-card-text
+                :class="['d-flex justify-center align-center']"
+              >
+                Bonjour, Je suis arrivé en France depuis 2021
+              </v-card-text>
+            </v-card>
+
+            <v-card>
+              <v-card-text>
+                <h4>Mon parcours</h4>
+                <v-timeline direction="horizontal">
+
+                </v-timeline>
+              </v-card-text>
+            </v-card>
+          </v-col>
         </v-row>
       </div>
     </v-col>
   </v-container>
-  <div class="main-container">
-
-    <!-- <div class="container-wrapper">
-      <p @click="setIsOpen" class="mr-12 flex-end">
-        <span class="point">.</span>
-        <span class="point">.</span>
-        <span class="point">.</span>
-      </p>
-      <div class="description pa-4 mr-12" v-show="isOpen">
-        <p>
-          Recherche activement un stage pour la période du 27 novembre au 22 décembre
-        </p>
-      </div> -->
-
-    <!-- </div>
-    <div class="questions">
-      <p>Vous recherchez une développeuse ?</p>
-    </div>
-    <div class="flower-banner"></div> -->
-  </div>
+  <Footer/>
 </template>
 
 
@@ -100,6 +104,7 @@ const setIsOpen = () => {
 
 .v-container {
   padding: 16px 0;
+  font-family: 'ABeeZee', sans-serif;
 
   .head {
     position: relative;
@@ -108,7 +113,14 @@ const setIsOpen = () => {
     margin-bottom: 6px;
     height: 400px;
     width: 100%;
-    color: white;
+    color: $secondary;
+
+    h3 {
+      .myName {
+        font-family: 'Cookie', handwriting;
+        font-size: 40px;
+      }
+    }
   }
 
   .head::before {
@@ -133,94 +145,133 @@ const setIsOpen = () => {
     transform: skew(0deg, -6deg);
   }
 
+  .point {
+    font-size: 40px;
+    color: $secondary;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+
+    & {
+      border-radius: 100%;
+      border: var(--size) solid var(-&-color);
+      margin: 1.5px;
+    }
+
+    &:nth-child(1) {
+      animation: preloader .6s ease-in-out alternate infinite;
+
+    }
+
+    &:nth-child(2) {
+      animation: preloader .6s ease-in-out alternate .2s infinite;
+    }
+
+    &:nth-child(3) {
+      animation: preloader .6s ease-in-out alternate .4s infinite;
+    }
+
+    @keyframes preloader {
+      100% {
+        transform: scale(2);
+        color: $point-color;
+      }
+    }
+  }
+
   .egg {
+    position: relative;
     display: block;
     margin-left: 100px;
     margin-top: 50px;
     width: 356px;
     height: 300px;
     background-color: $tertiary;
+    overflow: hidden;
     border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
   }
-}
 
-
-.main-container {
-  display: block;
-
-  .container-wrapper {
-    display: flex;
-    align-items: flex-end;
-    flex-direction: column;
-    height: 200px;
-
-    .point {
-      font-size: 40px;
-      color: $secondary;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      align-content: center;
-      justify-content: center;
-
-      & {
-        border-radius: 100%;
-        border: var(--size) solid var(-&-color);
-        margin: 1.5px;
-      }
-
-      &:nth-child(1) {
-        animation: preloader .6s ease-in-out alternate infinite;
-
-      }
-
-      &:nth-child(2) {
-        animation: preloader .6s ease-in-out alternate .2s infinite;
-      }
-
-      &:nth-child(3) {
-        animation: preloader .6s ease-in-out alternate .4s infinite;
-      }
-
-      @keyframes preloader {
-        100% {
-          transform: scale(2);
-          color: $point-color;
-        }
-      }
-    }
-
-    .description {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 150px;
-      width: 500px;
-      border-bottom-left-radius: 50px;
-      background-color: $tertiary;
-    }
-  }
-
-  .questions {
-    font-family: 'Allura', handwriting;
-    font-size: 40px;
-    color: $secondary;
-    margin-left: 60px;
-
-    .quality {
-      font-size: 3em;
-      text-shadow: .03em .03em 0 $tertiary;
-    }
-  }
-
-  .flower-banner {
+  .egg::before {
+    content: '';
+    display: block;
     position: absolute;
-    bottom: 20vh;
     width: 100%;
-    height: 200px;
+    height: 100%;
+    opacity: 0.6;
     background-image: url(../assets/img/fleur.jpg);
+    background-position: 50% 0;
     background-size: cover;
-    background-position: center;
   }
+
+  .title {
+    position: absolute;
+    left: 350px;
+    bottom: 130px;
+    font-size: 65px;
+    color: $primary;
+    font-family: 'Cookie', handwriting;
+  }
+
+  .corner {
+    position: absolute;
+    background: none;
+    height: 40%;
+    width: 30%;
+  }
+
+  .cornerPink {
+    position: absolute;
+    background: none;
+    height: 35%;
+    width: 28%;
+  }
+
+  .top-left {
+    top: 0;
+    left: 0;
+    border-radius: 5px 0 0;
+    border-top: 6px solid $tertiary;
+    border-left: 6px solid $tertiary;
+  }
+
+  .top-left-pink {
+    top: 8px;
+    left: 8px;
+    border-radius: 5px 0 0;
+    border-top: 6px solid $secondary;
+    border-left: 6px solid $secondary;
+  }
+
+  .bottom-right {
+    bottom: 0;
+    right: 0;
+    border-radius: 0 0 0 5px;
+    border-bottom: 6px solid $tertiary;
+    border-right: 6px solid $tertiary;
+  }
+
+  .bottom-right-pink {
+    bottom: 8px;
+    right: 8px;
+    border-radius: 0 0 0 5px;
+    border-bottom: 6px solid $secondary;
+    border-right: 6px solid $secondary;
+  }
+
 }
+
+  .description {
+    position: absolute;
+    right: 0;
+    margin-right: 50px;
+    display: flex;
+    align-items: center;
+    width: 500px;
+    border-bottom-left-radius: 50px;
+    background-color: $tertiary;
+    color: $primary;
+  }
+
 </style>
