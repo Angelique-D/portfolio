@@ -12,18 +12,21 @@ const listProjects = ref([
 </script>
 
 <template>
-  <v-app-bar :elevation="0" :height="100">
-
+  <v-app-bar
+    absolute
+   :elevation="0"
+   :height="90"
+  >
     <router-link to="/">
       <v-app-bar-title class="title" :class="{
         'ml-15': $vuetify.display.smAndUp,
         'ml-5': $vuetify.display.smAndDown
       }">
         <p class="firstName">
-          {{ $vuetify.display.smAndDown ? "A" : "Angélique" }}
+          A
         </p>
-        <p class="lastName" :style="[$vuetify.display.smAndDown ? { 'left': '30px' } : { 'left': '150px' }]">
-          {{ $vuetify.display.smAndDown ? "D" : "Didillon" }}
+        <p class="lastName">
+          D
         </p>
       </v-app-bar-title>
     </router-link>
@@ -53,22 +56,18 @@ const listProjects = ref([
 a {
   text-decoration: none;
   .title {
-    font-family: 'Allura', handwriting;
-    color: $tertiary;
+    font-family: 'Cookie', handwriting;
     font-size: 56px;
 
     .lastName {
       position: relative;
-
-      &::first-letter {
-        color: $tertiary;
-      }
+      left: 25px;
+      top: -5px;
+      color: $tertiary;
     }
 
     .firstName {
-      &::first-letter {
-        color: $tertiary
-      }
+      color: $tertiary
     }
   }
 }
