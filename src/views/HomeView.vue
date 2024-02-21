@@ -3,6 +3,7 @@ import { ref } from 'vue';
 import Navbar from '@/components/Navbar.vue';
 import Footer from '@/components/Footer.vue';
 import { mdiChevronDoubleDown } from '@mdi/js';
+import Egg from '@/assets/svg/Egg.svg';
 
 const isOpen = ref(false);
 const setIsOpen = () => {
@@ -63,12 +64,13 @@ const setIsOpen = () => {
         <v-row>
           <v-col cols="12" sm="6">
             <div class="egg"></div>
-            <h5 class="title">À propos de moi</h5>
+            <h5 class="title">À PROPOS DE MOI</h5>
           </v-col>
+
           <v-col cols="12" sm="6">
             <v-card
               class="mt-16"
-              :class="[`elevation-${0}`]"
+              :class="[`elevation-${0}`, 'd-flex justify-center align-center']"
             >
               <div class="top-left corner"></div>
               <div class="bottom-right corner"></div>
@@ -76,8 +78,9 @@ const setIsOpen = () => {
               <div class="bottom-right-pink cornerPink"></div>
               <v-card-text
                 :class="['d-flex justify-center align-center']"
+                style="min-height: 200px; max-width: 600px;"
               >
-                Bonjour, Je suis arrivé en France depuis 2021
+                Bonjour, Je suis canadienne et j'ai découvert une passion pour le développement web et web mobile. Arrivé en France en 2021, je m'autoditacte pour transformer cette passion en métier.
               </v-card-text>
             </v-card>
 
@@ -89,6 +92,55 @@ const setIsOpen = () => {
                 </v-timeline>
               </v-card-text>
             </v-card>
+          </v-col>
+        </v-row>
+      </div>
+    </v-col>
+
+    <v-col cols="12" class="mt-16" id="projects">
+      <div>
+        <v-row>
+          <v-col cols="12" sm="6">
+            <h5 class="title">MES PROJETS</h5>
+          </v-col>
+        </v-row>
+      </div>
+    </v-col>
+
+    <v-col cols="12" class="mt-16" id="contact">
+      <div>
+        <v-row>
+          <v-col cols="12" sm="6">
+            <div class="egg"></div>
+            <h5 class="title">ME CONTACTER</h5>
+          </v-col>
+          <v-col cols="12" sm="6">
+            <v-form v-model="sendMail">
+              <v-row>
+                <v-col cols="12" md="4">
+                  <v-text-field
+                    v-model="name"
+                    :rules="nameRules"
+                    :counter="20"
+                    label="Nom"
+                    required
+                    hide-details
+                  />
+                </v-col>
+
+                <v-col cols="12" md="5">
+                  <v-text-field
+                    v-model="email"
+                    :rules="emailRules"
+                    :counter="15"
+                    label="Email"
+                    required
+                    hide-details
+                  />
+                </v-col>
+              </v-row>
+
+            </v-form>
           </v-col>
         </v-row>
       </div>
@@ -206,10 +258,10 @@ const setIsOpen = () => {
   }
 
   .title {
-    position: absolute;
-    left: 350px;
+    position: relative;
+    left: 300px;
     bottom: 130px;
-    font-size: 65px;
+    font-size: 55px;
     color: $primary;
     font-family: 'Cookie', handwriting;
   }
