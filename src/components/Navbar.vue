@@ -44,7 +44,10 @@ const listProjects = ref([
       </div>
 
       <div class="mr-10 listNav font-weight-bold">
-        <a href="#">Mon cv <v-icon :icon="mdiDownload" /></a>
+        <a href="./src/assets/pdf/CV-AngeliqueDidillon.pdf" download>
+          Mon cv
+          <v-icon :icon="mdiDownload" />
+        </a>
       </div>
     </template>
   </v-app-bar>
