@@ -8,6 +8,6 @@
 @import "../styles/settings.scss";
 .v-footer {
   background-color: $primary;
-  color: white;
+  color: $secondary;
 }
 </style>

@@ -66,11 +66,11 @@ a {
       position: relative;
       left: 25px;
       top: -5px;
-      color: $tertiary;
+      color: $secondary;
     }
 
     .firstName {
-      color: $tertiary
+      color: $secondary;
     }
   }
 }
@@ -80,7 +80,7 @@ a {
 
   a {
     text-decoration: none;
-    color: $tertiary;
+    color: $secondary;
   }
 }
 
