@@ -2,6 +2,7 @@
 import { ref } from 'vue';
 import Navbar from '@/components/Navbar.vue';
 import Footer from '@/components/Footer.vue';
+import SocialMedia from '@/components/SocialMedia.vue';
 
 const isOpen = ref(false);
 const setIsOpen = () => {
@@ -60,8 +61,9 @@ const setIsOpen = () => {
 
       </v-row>
     </div>
-
   </v-container>
+
+  <SocialMedia/>
   <Footer/>
 </template>
 
@@ -82,7 +84,7 @@ const setIsOpen = () => {
     text-align: center;
     padding: 12px;
     margin-bottom: 6px;
-    height: 89vh;
+    height: 89.7vh;
     width: 100%;
     color: $secondary;
 

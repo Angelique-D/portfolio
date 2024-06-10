@@ -1,13 +1,6 @@
-/**
- * src/styles/settings.scss
- *
- * Configures SASS variables and Vuetify overwrites
- */
-
-// https://vuetifyjs.com/features/sass-variables/`
-// @use 'vuetify/settings' with (
-//   $color-pack: false
-// );
+@use 'vuetify/settings' with (
+  $color-pack: false
+);
 
 @import url(https://fonts.bunny.net/css);
 @import url(https://fonts.bunny.net/css?family=abeezee:400|allura:400|vibur:400|cookie:400);
@@ -24,6 +17,21 @@
 body {
     margin: 0;
     padding: 0;
+}
+
+.transitionPageAnimated {
+    animation: fadeInAnimation ease 3s;
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
+}
+
+@keyframes fadeInAnimation {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
 }
 
 

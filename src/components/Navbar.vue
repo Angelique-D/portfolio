@@ -33,14 +33,10 @@ const listProjects = ref([
 
     <template v-slot:append>
       <div class="mr-10 listNav font-weight-bold">
-        <a href="#">À propos</a>
+        <a href="/about">À propos</a>
       </div>
       <div class="mr-10 listNav font-weight-bold">
         <a href="#">Mes projets</a>
-      </div>
-
-      <div class="mr-10 listNav font-weight-bold">
-        <a href="#">Contact</a>
       </div>
 
       <div class="mr-10 listNav font-weight-bold">

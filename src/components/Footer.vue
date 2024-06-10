@@ -1,6 +1,10 @@
+<script setup>
+const currentYear = new Date().getFullYear();
+</script>
+
 <template>
   <v-footer class="justify-center">
-    2024 - Portfolio de Angélique Didillon
+    {{ currentYear }} - Portfolio de Angélique Didillon
   </v-footer>
 </template>
 
@@ -9,5 +13,7 @@
 .v-footer {
   background-color: $primary;
   color: $secondary;
+  font-family: 'ABeeZee', sans-serif;
+  font-size: 14px;
 }
 </style>
