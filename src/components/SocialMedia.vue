@@ -28,16 +28,13 @@ import { mdiEmail } from "@mdi/js";
 @import "../styles/settings.scss";
 
 ul {
-  background-color: $primary;
-  position: absolute;
-  bottom: 0;
-  left: 10px;
+  background-color: transparent;
+  bottom: 10px;
   z-index: 2;
   list-style: none;
-  margin-bottom: 15px;
+  position: sticky;
 
   li {
-    margin-top: 5px;
     a{
       text-decoration: none;
       .v-icon {
@@ -51,8 +48,6 @@ ul {
       }
 
     }
-
-
   }
 }
 </style>

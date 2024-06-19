@@ -17,9 +17,9 @@ const setIsOpen = () => {
       <v-row>
         <v-col cols="6">
           <div class="mt-16 font-weight-medium">
-            <h3>Bienvenue,</h3>
-            <h3>Je m'appelle <span class="myName">Angélique Didillon</span> </h3>
-            <h3>Développeuse Web et Web Mobile</h3>
+            <h4>Bienvenue,</h4>
+            <h4>Je m'appelle <span class="myName">Angélique Didillon</span> </h4>
+            <h4>Développeuse Web et Web Mobile</h4>
           </div>
         </v-col>
         <v-col cols="6">
@@ -63,7 +63,7 @@ const setIsOpen = () => {
     </div>
   </v-container>
 
-  <SocialMedia/>
+  <SocialMedia style="position: absolute;"/>
   <Footer/>
 </template>
 
@@ -88,7 +88,9 @@ const setIsOpen = () => {
     width: 100%;
     color: $secondary;
 
-    h3 {
+    h4 {
+      font-size: 18px;
+
       .myName {
         font-family: 'Cookie', handwriting;
         font-size: 40px;

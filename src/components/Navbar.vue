@@ -13,9 +13,9 @@ const listProjects = ref([
 
 <template>
   <v-app-bar
-    absolute
+    scroll-behavior="hide"
+    scroll-threshold="100"
    :elevation="0"
-   :height="90"
   >
     <router-link to="/">
       <v-app-bar-title class="title" :class="{
@@ -32,14 +32,20 @@ const listProjects = ref([
     </router-link>
 
     <template v-slot:append>
-      <div class="mr-10 listNav font-weight-bold">
-        <a href="/about">À propos</a>
-      </div>
-      <div class="mr-10 listNav font-weight-bold">
-        <a href="#">Mes projets</a>
-      </div>
+      <router-link to="/about">
+        <div class="mr-10 link font-weight-bold">
+          À propos
+        </div>
+      </router-link>
 
-      <div class="mr-10 listNav font-weight-bold">
+      <router-link to="#">
+        <div class="mr-10 link font-weight-bold">
+          Mes projets
+        </div>
+      </router-link>
+
+
+      <div class="mr-10 link font-weight-bold">
         <a href="./src/assets/pdf/CV-AngeliqueDidillon.pdf" download>
           Mon cv
           <v-icon :icon="mdiDownload" />
@@ -53,31 +59,22 @@ const listProjects = ref([
 @import "../styles/settings.scss";
 
 a {
-  text-decoration: none;
-  .title {
-    font-family: 'Cookie', handwriting;
-    font-size: 56px;
+  color: $secondary;
+}
 
-    .lastName {
-      position: relative;
-      left: 25px;
-      top: -5px;
-      color: $secondary;
-    }
+.title {
+  font-family: 'Cookie', handwriting;
+  font-size: 56px;
 
-    .firstName {
-      color: $secondary;
-    }
+  .lastName {
+    position: relative;
+    left: 25px;
+    top: -5px;
   }
 }
 
-.listNav {
+.link {
   font-family: 'ABeeZee', sans-serif;
-
-  a {
-    text-decoration: none;
-    color: $secondary;
-  }
 }
 
 </style>

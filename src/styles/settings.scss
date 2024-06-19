@@ -14,9 +14,18 @@
     box-sizing: border-box;
 }
 
+a {
+    text-decoration: none;
+}
+
 body {
     margin: 0;
     padding: 0;
+}
+
+h3 {
+    font-weight: bold;
+    font-size: 25px;
 }
 
 .transitionPageAnimated {
@@ -42,6 +51,10 @@ body {
 
 .v-app-bar {
     background-color: $primary !important;
+}
+
+.v-timeline--horizontal.v-timeline {
+    grid-column-gap: 0px;
 }
 
 
