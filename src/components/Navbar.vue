@@ -18,10 +18,11 @@ const listProjects = ref([
    :elevation="0"
   >
     <router-link to="/">
-      <v-app-bar-title class="title" :class="{
-        'ml-15': $vuetify.display.smAndUp,
-        'ml-5': $vuetify.display.smAndDown
-      }">
+      <v-app-bar-title
+      class="title"
+      :class="{
+      'ml-15': $vuetify.display.smAndUp,
+      'ml-5': $vuetify.display.smAndDown }">
         <p class="firstName">
           A
         </p>
@@ -66,10 +67,15 @@ a {
   font-family: 'Cookie', handwriting;
   font-size: 56px;
 
+  .firstName {
+    position: relative;
+    top: 6px;
+  }
+
   .lastName {
     position: relative;
-    left: 25px;
-    top: -5px;
+    left: 24px;
+    top: 0px;
   }
 }
 

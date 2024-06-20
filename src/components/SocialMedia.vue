@@ -30,6 +30,7 @@ import { mdiEmail } from "@mdi/js";
 ul {
   background-color: transparent;
   bottom: 10px;
+  margin-left: 8px;
   z-index: 2;
   list-style: none;
   position: sticky;

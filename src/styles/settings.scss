@@ -18,6 +18,31 @@ a {
     text-decoration: none;
 }
 
+.text-tertiary {
+    color: $tertiary;
+}
+
+.text-secondary {
+    color: $secondary;
+}
+.bgPrimary {
+    background-color: $primary;
+}
+
+.v-timeline .v-timeline-divider__inner-dot {
+    background-color: $primary !important;
+}
+
+.titleh3Underline::after {
+    content: " ";
+    display: inline-block;
+    width: 175px;
+    position: relative;
+    left: -155px;
+    bottom: -12px;
+    border-bottom: 4px solid $secondary;
+}
+
 body {
     margin: 0;
     padding: 0;
