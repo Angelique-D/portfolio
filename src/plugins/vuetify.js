@@ -1,5 +1,5 @@
 // Styles
-import '@mdi/font/css/materialdesignicons.css' // A revoir parce que pas utilisé
+import '@/styles/main.scss'
 import 'vuetify/styles'
 
 // Composables

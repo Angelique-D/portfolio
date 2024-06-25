@@ -10,6 +10,10 @@ const routes = [
     path: '/about',
     component: () => import('@/views/AboutView.vue')
   },
+  {
+    path: '/hangmangame',
+    component: () => import('@/views/HangmanGame.vue')
+  },
 ]
 
 const router = createRouter({

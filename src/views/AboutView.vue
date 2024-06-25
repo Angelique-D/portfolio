@@ -1,8 +1,11 @@
 <script setup>
-import { ref } from 'vue';
+import { ref, computed } from 'vue';
+import { useDisplay } from 'vuetify'
 import Navbar from '@/components/Navbar.vue';
 import Footer from '@/components/Footer.vue';
 import SocialMedia from '@/components/SocialMedia.vue';
+
+const { xs } = useDisplay();
 
 const years = ref([
   {
@@ -93,7 +96,9 @@ const skills = ref([
     name: "MONGOOSE",
     logo: ""
   },
-])
+]);
+
+const isActive = computed(() => xs.value);
 </script>
 
 <template>
@@ -101,7 +106,11 @@ const skills = ref([
   <v-container fluid>
     <div class="header-timeline">
       <v-row class="d-flex justify-center">
-        <v-col cols="8">
+        <v-col cols="8"
+        md="8"
+        sm="12"
+        xs="12"
+        :class="[isActive ? ['minWidth', 'titleh3Underline::after' ] : '']">
           <v-card :class="[`elevation-${0}`, 'bgPrimary mt-8 mb-8 text-tertiary']">
             <v-card-title>
               <h3 class="titleh3Underline mt-5 mb-5">╰┈➤ À propos de moi</h3>
@@ -126,7 +135,7 @@ const skills = ref([
             <div :class="`pt-1 headline font-weight-bold`" v-text="year.year"></div>
           </template>
           <div>
-            <h2 :class="`mt-n1 headline font-weight-light mb-4 title-light`" v-text="year.title" />
+            <h2 :class="`mt-n1 headline font-weight-light mb-4 text-light`" v-text="year.title" />
             <div v-text="year.text" />
           </div>
         </v-timeline-item>
@@ -147,18 +156,25 @@ const skills = ref([
 
     <div class="header-skills">
       <v-row class="d-flex justify-center">
-        <v-col cols="8">
+        <v-col
+        cols="8"
+        md="8"
+        sm="12"
+        xs="12"
+        :class="[isActive ? ['minWidth', 'titleh3Underline::after' ] : '']">
           <h3 class="skills-title titleh3Underline mt-15 mb-5">╰┈➤ Mes compétences</h3>
         </v-col>
       </v-row>
     </div>
 
     <div class="container-myskills d-flex justify-center">
-      <v-row class="d-flex justify-center flex-wrap" style="max-width: 1150px;">
+      <v-row
+      class="d-flex justify-center flex-wrap"
+      style="max-width: 1150px;">
         <v-col cols="auto" v-for="skill in skills" :key="skill.name"
           class="d-flex flex-wrap justify-center align-center">
-          <v-card class="d-flex justify-center align-center bgPrimary mt-8 mb-8 text-tertiary" width="150" height="150">
-            <v-card-item>
+          <v-card class="d-flex justify-center align-center bgPrimary mt-8 mb-8 text-tertiary cardStyle">
+            <v-card-item class="w-100 h-100">
               <div class="image">
                 <img
                 :src="skill.logo"
@@ -166,7 +182,9 @@ const skills = ref([
                 class="skill-logo mb-2">
               </div>
               <div class="name">
-                <p class="text-center">{{ skill.name }}</p>
+                <p class="text-center">
+                  {{ skill.name }}
+                </p>
               </div>
             </v-card-item>
           </v-card>
@@ -180,18 +198,6 @@ const skills = ref([
 
 <style scoped lang="scss">
 @import "../styles/settings.scss";
-
-.dot-secondary {
-  background: #FFC1A3 !important;
-}
-
-.title-light {
-  color: $secondary;
-}
-
-.dot-tertiary {
-  background: #0B032F !important;
-}
 
 .v-container {
   font-family: 'ABeeZee', sans-serif;
@@ -214,16 +220,38 @@ const skills = ref([
   }
 
   .container-myskills {
-    .image {
-      display: flex;
-      justify-content: center;
-      align-items: center;
+    .cardStyle {
+      height: 150px;
+      width: 150px;
+      background-color: $secondary;
+      color: $tertiary;
+
+      .image {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        @media (max-width: 599px) {
+
+        }
+      }
+      .skill-logo {
+        object-fit: cover;
+        max-height: 80px;
+        max-width: 80px;
+      }
+
+      @media (max-width: 599px) {
+        width: 100px;
+        height: 100px;
+      }
     }
-    .skill-logo {
-      object-fit: cover;
-      height: 60px;
-      width: 60px;
-    }
+
   }
+}
+
+.minWidth {
+ min-width: 100% !important;
+ text-align: center;
 }
 </style>

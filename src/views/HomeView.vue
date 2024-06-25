@@ -11,18 +11,25 @@ const setIsOpen = () => {
 </script>
 
 <template>
-  <Navbar />
+  <Navbar/>
   <v-container fluid>
     <div class="head">
       <v-row>
-        <v-col cols="6" class="d-flex align-center justify-center">
+        <v-col
+          cols="12"
+          md="6"
+          class="d-flex align-center justify-center">
           <div class="font-weight-medium">
             <h4>Bienvenue,</h4>
-            <h4>Je m'appelle <span class="myName">Angélique Didillon</span> </h4>
+            <h4>Je m'appelle <span class="myName">Angélique Didillon</span></h4>
             <h4>Développeuse Web et Web Mobile</h4>
           </div>
         </v-col>
-        <v-col cols="6" class="d-flex justify-center">
+
+        <v-col
+          cols="12"
+          md="6"
+          class="d-flex justify-center">
           <div class="container-situation">
             <p @click="setIsOpen" class="mr-12 flex-end">
               <span class="point">.</span>
@@ -31,28 +38,35 @@ const setIsOpen = () => {
             </p>
             <v-fade-transition>
               <div class="description pa-4" v-show="isOpen">
-                <p>
-                  Je suis à la recherche d'une alternance pour le mois de septembre, si mon profil vous intéresse n'hésitez pas à me contacter
-                </p>
+                <v-row>
+                  <v-col cols="12" class="d-flex">
+                    <p>
+                      Je suis à la recherche d'une alternance pour le mois de septembre, si mon profil vous intéresse
+                      n'hésitez pas à me contacter
+                    </p>
+                  </v-col>
+                </v-row>
               </div>
             </v-fade-transition>
           </div>
-            <v-card
-              :class="[`elevation-${0}`, 'bgPrimary']"
-            >
-              <div class="top-left corner"></div>
-              <div class="bottom-right corner"></div>
-              <div class="top-left-pink cornerPink"></div>
-              <div class="bottom-right-pink cornerPink"></div>
-              <v-card-text
-                :class="['d-flex ml-5 mr-5 justify-center align-center font-weight-medium text-center text-tertiary']"
-                style="min-height: 200px; max-width: 580px; font-size: 1rem"
-              >
-              Je suis motivée à travailler sur des projets innovants et à continuer d'apprendre et de m'adapter aux nouvelles technologies. Mon objectif est de contribuer de manière significative à des équipes de développement dynamiques et de créer des solutions web de qualité.
-              </v-card-text>
-            </v-card>
-        </v-col>
 
+          <v-card
+            :class="[`elevation-${0}`, 'bgPrimary']"
+          >
+            <div class="top-left corner"></div>
+            <div class="bottom-right corner"></div>
+            <div class="top-left-pink cornerPink"></div>
+            <div class="bottom-right-pink cornerPink"></div>
+            <v-card-text
+              :class="['d-flex ml-5 mr-5 mt-5 mb-5 justify-center align-center font-weight-medium text-center text-tertiary']"
+              style="min-height: 200px; max-width: 580px; font-size: 1rem"
+            >
+              Je suis motivée à travailler sur des projets innovants et à continuer d'apprendre et de m'adapter aux
+              nouvelles technologies. Mon objectif est de contribuer de manière significative à des équipes de
+              développement dynamiques et de créer des solutions web de qualité.
+            </v-card-text>
+          </v-card>
+        </v-col>
       </v-row>
     </div>
   </v-container>
@@ -60,7 +74,6 @@ const setIsOpen = () => {
   <SocialMedia style="position: absolute;"/>
   <Footer/>
 </template>
-
 
 
 <style scoped lang="scss">
@@ -143,7 +156,7 @@ const setIsOpen = () => {
     color: $primary;
     font-family: 'Cookie', handwriting;
   }
-  
+
   .corner {
     position: absolute;
     background: none;
@@ -192,16 +205,19 @@ const setIsOpen = () => {
 
 }
 
-  .description {
-    position: absolute;
-    right: 0;
-    margin-right: 50px;
-    display: flex;
-    align-items: center;
-    width: 500px;
-    border-bottom-left-radius: 50px;
-    background-color: $secondary;
-    color: $primary;
+.description {
+  position: absolute;
+  right: 50px;
+  width: 500px;
+  align-items: center;
+  padding: 10px;
+  border-bottom-left-radius: 50px;
+  background-color: $secondary;
+  color: $primary;
+
+  @media (max-width: 599px) {
+    width: 300px;
   }
+}
 
 </style>

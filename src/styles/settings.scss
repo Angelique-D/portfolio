@@ -1,9 +1,5 @@
-@use 'vuetify/settings' with (
-  $color-pack: false
-);
-
 @import url(https://fonts.bunny.net/css);
-@import url(https://fonts.bunny.net/css?family=abeezee:400|allura:400|vibur:400|cookie:400);
+@import url(https://fonts.bunny.net/css?family=abeezee:400|allura:400|cookie:400);
 @import "./variables.scss";
 
 .v-toolbar-title__placeholder {
@@ -22,15 +18,26 @@ a {
     color: $tertiary;
 }
 
+.text-light {
+    color: $secondary;
+}
+
 .text-secondary {
     color: $secondary;
 }
+
 .bgPrimary {
     background-color: $primary;
 }
 
 .v-timeline .v-timeline-divider__inner-dot {
     background-color: $primary !important;
+}
+
+.titleh3Underline {
+    letter-spacing: 0.0125em;
+    padding: 0.5rem 1rem;
+    font-size: 2rem;
 }
 
 .titleh3Underline::after {
@@ -79,8 +86,29 @@ h3 {
 }
 
 .v-timeline--horizontal.v-timeline {
-    grid-column-gap: 0px;
+    grid-column-gap: 0;
 }
 
+@media (max-width: 599px) {
+    .titleh3Underline {
+        font-size: 1.5rem;
+    }
 
+    .titleh3Underline::after {
+        content: none;
+    }
+}
+
+// MediaQuery for About page
+
+@media (max-width: 599px) {
+
+}
+
+// Hangmangame page
+
+.v-speed-dial__content {
+    top: 231px !important;
+    left: 14px !important;
+}
 
