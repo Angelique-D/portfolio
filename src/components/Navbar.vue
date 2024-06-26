@@ -12,6 +12,13 @@ const listProjects = ref([
   },
 ]);
 
+const listOfGames = ref([
+  {
+    title: 'Jeux du Pendu',
+    link: '/hangmangame'
+  },
+]);
+
 const titleClass = computed(() => ({
   'title': true,
   'ml-15': smAndUp.value,
@@ -27,8 +34,6 @@ const drawer = ref(false);
     scroll-behavior="hide"
     scroll-threshold="100"
    :elevation="0"
-    color="primary"
-    dark
   >
     <router-link to="/">
       <v-app-bar-title
@@ -61,6 +66,12 @@ const drawer = ref(false);
         </div>
       </router-link>
 
+      <router-link to="/hangmangame">
+        <div class="mr-10 link font-weight-bold">
+          Mes Jeux
+        </div>
+      </router-link>
+
 
       <div class="mr-10 link font-weight-bold">
         <a href="./src/assets/pdf/CV-AngeliqueDidillon.pdf" download>
@@ -79,7 +90,7 @@ const drawer = ref(false);
         <v-list-item>
           <v-list-item-title>
             <router-link to="/about" @click="drawer = false">
-              À propos de moi
+              À propos
             </router-link>
           </v-list-item-title>
         </v-list-item>
@@ -88,6 +99,14 @@ const drawer = ref(false);
           <v-list-item-title>
             <router-link to="#" @click="drawer = false">
               Mes projets
+            </router-link>
+          </v-list-item-title>
+        </v-list-item>
+
+        <v-list-item>
+          <v-list-item-title>
+            <router-link to="#" @click="drawer = false">
+              Mes Jeux
             </router-link>
           </v-list-item-title>
         </v-list-item>

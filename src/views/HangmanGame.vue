@@ -1,13 +1,16 @@
 <script setup>
 import { onMounted, ref } from 'vue'
+import { mdiRestart, mdiHeart } from "@mdi/js";
 
 const alphabet = ref(['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k',
    'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y']);
 const words = ref(['pomme', 'banane', 'poire', 'ananas', 'orange','melon', 'fraise', 'bleuet', 'bébé']);
 const countTry = ref(5);
 const isCharFound = ref(false);
+const nbCharFound = ref(0);
 const message = ref("");
 const isDisabled = ref({});
+
 
 function randomStringInArray(array) {
   return array[Math.floor(Math.random() * array.length)];
@@ -15,10 +18,12 @@ function randomStringInArray(array) {
 
 const word = ref(randomStringInArray(words.value));
 
-let getArrayOfChar = (word) => {
+console.log(word.value);
+
+function getArrayOfChar(word) {
   let charIndex = 0;
   const arrayOfChar = [];
-  while (charIndex < word.value.length) {
+  while (charIndex <= word.value.length - 1) {
     if (charIndex === 0) {
       arrayOfChar.push(word.value[charIndex].toUpperCase());
       charIndex++;
@@ -28,49 +33,93 @@ let getArrayOfChar = (word) => {
     }
   }
   return arrayOfChar;
-};
+}
+
+// À refaire
+function removeAccent(str) {
+  return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+}
 
 const showChars = ref(getArrayOfChar(word))
+const charVisibility = ref(showChars.value.map(() => false));
+
+const toggleCharVisibility = (index) => {
+  charVisibility.value[index] = !charVisibility.value[index];
+}
 
 function handlerBtn(value) {
-  console.log(value);
   isCharFound.value = false;
-  for (let i = 0; i < showChars.value.length; i++) {
-    if ( value === showChars.value[i]) {
-     isCharFound.value = true;
-    }
-    if (!isCharFound.value) {
+  let index = 0;
+  let charIndex = "";
+
+  while (index <= showChars.value.length - 1) {
+    charIndex = removeAccent(showChars.value[index].toLowerCase());
+
+    if (value === charIndex) {
+      if (nbCharFound.value === showChars.value.length - 1) {
+        toggleCharVisibility(index);
+        message.value = "Bravo vous avez gagné !";
+        break;
+    } else {
+        isCharFound.value = true;
+        nbCharFound.value++;
+        toggleCharVisibility(index);
+        message.value = `Vous avez trouvé ${nbCharFound.value} lettre.`
+      }
+    } else if (index === showChars.value.length - 1 && !isCharFound.value) {
       countTry.value--;
       if (countTry.value === 0) {
         message.value = "Vous avez perdu !";
       } else {
-        message.value = "Veuillez essayer une autre lettre";
+        message.value = "Pas de chance, essayez une autre lettre !";
       }
     }
+    index++;
   }
   isDisabled.value[value] = true;
+
 }
 
-console.log(isDisabled.value);
+function restart() {
+  word.value = randomStringInArray(words.value);
 
-onMounted(() => {
-  getArrayOfChar();
+  countTry.value = 5;
+  nbCharFound.value = 0;
+  message.value = "";
 
   alphabet.value.forEach(char => {
     isDisabled.value[char] = false;
   });
-});
 
+  showChars.value = getArrayOfChar(word.value);
+  charVisibility.value = showChars.value.map(() => false);
+}
+
+
+console.log(nbCharFound.value)
+console.log(word.value.length)
+console.log(showChars.value.length)
+
+onMounted(() => {
+
+});
 </script>
 
 <template>
-  <v-container fluid>
+  <v-container>
     <v-row>
-      <v-col cols="12">
+      <v-col cols="12" class="height">
         <h3 class="title text-center">
           Jeux du pendu
         </h3>
       </v-col>
+
+      <v-col cols="12" class="d-flex justify-center align-center">
+        <div v-for="(heart, index) in countTry" :key="index" class="hearts-container">
+          <v-icon class="heart-icon ml-2" :icon="mdiHeart"></v-icon>
+        </div>
+      </v-col>
+
       <v-col cols="12" class="d-flex align-center justify-center">
           <div
             class="borderChar"
@@ -79,7 +128,8 @@ onMounted(() => {
           >
             <div
               class="char"
-              :class="{'opacity100': isCharFound && charFound === char }"
+              :class="{ hidden: !charVisibility[index] }"
+              ref="char"
             >
             {{ char.valueOf() }}
             </div>
@@ -95,13 +145,31 @@ onMounted(() => {
           class="d-flex flex-wrap justify-center align-center"
         >
           <div class="container-btn" v-for="(alpha, index) in alphabet" :key="index">
-            <v-btn class="btn" @click="handlerBtn('alpha')" :disabled="isDisabled[alpha]">
+            <v-btn class="btn" @click="handlerBtn( alpha )" :disabled="isDisabled[alpha]">
               {{ alpha.valueOf() }}
             </v-btn>
           </div>
         </v-col>
-        <v-col cols="12" class="d-flex justify-center align-center">
-            {{ message.value }}
+        <v-col
+          cols="12"
+          class="d-flex flex-column justify-center align-center"
+          v-if="countTry.valueOf() === 0 || message.valueOf() === 'Bravo vous avez gagné !'  "
+        >
+          <div>
+            {{ message.valueOf() }}
+          </div>
+          <div>
+            <v-btn @click="restart()" variant="tonal" :append-icon="mdiRestart">
+              Recommencer
+            </v-btn>
+          </div>
+        </v-col>
+        <v-col
+          cols="12"
+          class="d-flex justify-center align-center"
+          v-else
+        >
+            {{ message.valueOf() }}
         </v-col>
       </v-row>
     </div>
@@ -112,9 +180,20 @@ onMounted(() => {
 <style scoped lang="scss">
 .v-container {
   height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
-  .opacity100 {
-    opacity: 100;
+  @media (min-width: 599px) {
+    flex-direction: column;
+  }
+
+  .heart-icon {
+    color: rgb( 175, 26, 80);
+  }
+
+  .hidden {
+    visibility: hidden;
   }
 
   .borderChar {
@@ -132,13 +211,10 @@ onMounted(() => {
       align-items: center;
       height: 35px;
       width: 35px;
-      opacity: 0;
       font-family: 'ABeeZee', sans-serif;
       font-size: 25px;
     }
   }
-
-
 
   .container-alphabet {
     display: flex;
