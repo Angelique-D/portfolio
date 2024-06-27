@@ -1,9 +1,9 @@
 <script setup>
 import {computed, ref} from 'vue';
-import { mdiDownload, mdiMenu } from '@mdi/js';
-import { useDisplay } from "vuetify";
+import {mdiDownload, mdiMenu} from '@mdi/js';
+import {useDisplay} from "vuetify";
 
-const { smAndUp, smAndDown, xs } = useDisplay();
+const {smAndUp, smAndDown, sm, xs} = useDisplay();
 
 const listProjects = ref([
   {
@@ -25,7 +25,7 @@ const titleClass = computed(() => ({
   'ml-5': smAndDown.value,
 }));
 
-const isXsBreakpoint = computed(() => xs.value);
+const isXsBreakpoint = computed(() => sm.value || xs.value);
 const drawer = ref(false);
 </script>
 
@@ -33,11 +33,11 @@ const drawer = ref(false);
   <v-app-bar
     scroll-behavior="hide"
     scroll-threshold="100"
-   :elevation="0"
+    :elevation="0"
   >
     <router-link to="/">
       <v-app-bar-title
-      :class="titleClass">
+        :class="titleClass">
         <p class="firstName">
           A
         </p>
@@ -48,8 +48,7 @@ const drawer = ref(false);
     </router-link>
 
     <template v-slot:append v-if="isXsBreakpoint">
-      <v-btn icon @click="drawer = !drawer" class="text-light">
-        <v-icon :icon="mdiMenu"/>
+      <v-btn :icon="mdiMenu" @click="drawer = !drawer" class="text-light">
       </v-btn>
     </template>
 
@@ -66,62 +65,96 @@ const drawer = ref(false);
         </div>
       </router-link>
 
-      <router-link to="/hangmangame">
-        <div class="mr-10 link font-weight-bold">
-          Mes Jeux
-        </div>
-      </router-link>
+      <v-menu
+        transition="slide-y-transition"
+      >
+        <template v-slot:activator="{ props }">
+          <div
+            v-bind="props"
+            class="mr-10 link font-weight-bold"
+          >
+            Mes jeux
+          </div>
+        </template>
+        <v-list>
+          <v-list-item
+            v-for="(game, i) in listOfGames"
+            :key="i"
+          >
+            <v-list-item-title>{{ game.title }}</v-list-item-title>
+          </v-list-item>
+        </v-list>
+      </v-menu>
 
 
       <div class="mr-10 link font-weight-bold">
         <a href="./src/assets/pdf/CV-AngeliqueDidillon.pdf" download>
           Mon cv
-          <v-icon :icon="mdiDownload" />
+          <v-icon :icon="mdiDownload"/>
         </a>
       </div>
     </template>
 
-    <v-navigation-drawer
+
+  </v-app-bar>
+
+  <v-navigation-drawer
+    class="bgTertiary"
     v-model="drawer"
     temporary
     right
-    >
-      <v-list>
-        <v-list-item>
+  >
+    <v-list>
+      <v-list-item>
+        <v-list-item-title>
+          <router-link to="/about" @click="drawer = false">
+            À propos
+          </router-link>
+        </v-list-item-title>
+      </v-list-item>
+
+      <v-list-item>
+        <v-list-item-title>
+          <router-link to="#" @click="drawer = false">
+            Mes projets
+          </router-link>
+        </v-list-item-title>
+      </v-list-item>
+
+      <v-list-group value="myGames" style="width: 100% !important;">
+        <template v-slot:activator="{ props }">
+          <v-list-item
+            v-bind="props"
+            title="Mes jeux"
+            class="text-light"
+          ></v-list-item>
+        </template>
+
+        <v-list-item
+          v-for="(game, i) in listOfGames"
+          :key="i"
+          :value="game.title"
+          class="text-light"
+        >
           <v-list-item-title>
-            <router-link to="/about" @click="drawer = false">
-              À propos
+            <router-link to="/hangmangame" @click="drawer = false">
+              {{ game.title }}
             </router-link>
           </v-list-item-title>
         </v-list-item>
+      </v-list-group>
 
-        <v-list-item>
-          <v-list-item-title>
-            <router-link to="#" @click="drawer = false">
-              Mes projets
-            </router-link>
-          </v-list-item-title>
-        </v-list-item>
 
-        <v-list-item>
-          <v-list-item-title>
-            <router-link to="#" @click="drawer = false">
-              Mes Jeux
-            </router-link>
-          </v-list-item-title>
-        </v-list-item>
-
-        <v-list-item>
-          <v-list-item-title>
-            <a href="./src/assets/pdf/CV-AngeliqueDidillon.pdf" download="CV-AngéliqueDidillon" target="_blank" @click="drawer = false">
-              Mon CV
-              <v-icon>mdi-download</v-icon>
-            </a>
-          </v-list-item-title>
-        </v-list-item>
-      </v-list>
-    </v-navigation-drawer>
-  </v-app-bar>
+      <v-list-item :append-icon="mdiDownload" class="text-white">
+        <v-list-item-title>
+          <a href="./src/assets/pdf/CV-AngeliqueDidillon.pdf" download="CV-AngéliqueDidillon" target="_blank"
+             @click="drawer = false">
+            Mon CV
+          </a>
+        </v-list-item-title>
+      </v-list-item>
+    </v-list>
+  </v-navigation-drawer>
 </template>
 
 <style scoped lang="scss">
@@ -149,6 +182,8 @@ a {
 
 .link {
   font-family: 'ABeeZee', sans-serif;
+  cursor: pointer;
+  color: $secondary;
 }
 
 </style>

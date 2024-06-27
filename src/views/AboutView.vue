@@ -115,7 +115,7 @@ const isActive = computed(() => xs.value);
             <v-card-title>
               <h3 class="titleh3Underline mt-5 mb-5">╰┈➤ À propos de moi</h3>
             </v-card-title>
-            <v-card-text>
+            <v-card-text class="text-light style-text">
               <p>
                 Bonjour, je m'appelle Angélique et je suis développeuse web. Originaire du Canada,
                 j'ai découvert une véritable passion pour le développement web. En 2021, après avoir déménagé en France,
@@ -191,8 +191,8 @@ const isActive = computed(() => xs.value);
         </v-col>
       </v-row>
     </div>
+    <SocialMedia />
   </v-container>
-  <SocialMedia />
   <Footer />
 </template>
 
@@ -226,25 +226,31 @@ const isActive = computed(() => xs.value);
       background-color: $secondary;
       color: $tertiary;
 
+      @media (max-width: 599px) {
+        width: 85px;
+        height: 85px;
+        font-size: 8px;
+      }
+
       .image {
         display: flex;
         justify-content: center;
         align-items: center;
 
-        @media (max-width: 599px) {
 
-        }
       }
       .skill-logo {
         object-fit: cover;
         max-height: 80px;
         max-width: 80px;
+
+        @media (max-width: 599px) {
+          max-width: 40px;
+          max-height: 40px;
+        }
       }
 
-      @media (max-width: 599px) {
-        width: 100px;
-        height: 100px;
-      }
+
     }
 
   }

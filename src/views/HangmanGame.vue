@@ -1,24 +1,22 @@
 <script setup>
-import { onMounted, ref } from 'vue'
+import { ref } from 'vue'
 import { mdiRestart, mdiHeart } from "@mdi/js";
+import words from "@/components/hangmanGame/listOfWords";
+import NavBarGame from "@/components/NavBarGame.vue";
 
 const alphabet = ref(['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k',
    'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y']);
-const words = ref(['pomme', 'banane', 'poire', 'ananas', 'orange','melon', 'fraise', 'bleuet', 'bébé']);
 const countTry = ref(5);
 const isCharFound = ref(false);
 const nbCharFound = ref(0);
 const message = ref("");
 const isDisabled = ref({});
 
-
 function randomStringInArray(array) {
   return array[Math.floor(Math.random() * array.length)];
 }
 
-const word = ref(randomStringInArray(words.value));
-
-console.log(word.value);
+const word = ref(randomStringInArray(words));
 
 function getArrayOfChar(word) {
   let charIndex = 0;
@@ -35,13 +33,12 @@ function getArrayOfChar(word) {
   return arrayOfChar;
 }
 
-// À refaire
 function removeAccent(str) {
   return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
 }
 
-const showChars = ref(getArrayOfChar(word))
-const charVisibility = ref(showChars.value.map(() => false));
+const arrayChars = ref(getArrayOfChar(word));
+const charVisibility = ref(arrayChars.value.map(() => false));
 
 const toggleCharVisibility = (index) => {
   charVisibility.value[index] = !charVisibility.value[index];
@@ -52,11 +49,11 @@ function handlerBtn(value) {
   let index = 0;
   let charIndex = "";
 
-  while (index <= showChars.value.length - 1) {
-    charIndex = removeAccent(showChars.value[index].toLowerCase());
+  while (index <= arrayChars.value.length - 1) {
+    charIndex = removeAccent(arrayChars.value[index].toLowerCase());
 
     if (value === charIndex) {
-      if (nbCharFound.value === showChars.value.length - 1) {
+      if (nbCharFound.value === arrayChars.value.length - 1) {
         toggleCharVisibility(index);
         message.value = "Bravo vous avez gagné !";
         break;
@@ -66,10 +63,11 @@ function handlerBtn(value) {
         toggleCharVisibility(index);
         message.value = `Vous avez trouvé ${nbCharFound.value} lettre.`
       }
-    } else if (index === showChars.value.length - 1 && !isCharFound.value) {
+    } else if (index === arrayChars.value.length - 1 && !isCharFound.value) {
       countTry.value--;
       if (countTry.value === 0) {
         message.value = "Vous avez perdu !";
+        charVisibility.value = arrayChars.value.map(() => true);
       } else {
         message.value = "Pas de chance, essayez une autre lettre !";
       }
@@ -81,7 +79,7 @@ function handlerBtn(value) {
 }
 
 function restart() {
-  word.value = randomStringInArray(words.value);
+  word.value = randomStringInArray(words);
 
   countTry.value = 5;
   nbCharFound.value = 0;
@@ -91,39 +89,31 @@ function restart() {
     isDisabled.value[char] = false;
   });
 
-  showChars.value = getArrayOfChar(word.value);
-  charVisibility.value = showChars.value.map(() => false);
+  arrayChars.value = word.value.split('');
+  charVisibility.value = arrayChars.value.map(() => false);
 }
 
-
-console.log(nbCharFound.value)
-console.log(word.value.length)
-console.log(showChars.value.length)
-
-onMounted(() => {
-
-});
 </script>
 
 <template>
   <v-container>
-    <v-row>
-      <v-col cols="12" class="height">
-        <h3 class="title text-center">
+    <v-row class="maxHeightRow">
+      <v-col cols="12" class="d-flex align-center justify-center maxHeight">
+        <h3 class="title ">
           Jeux du pendu
         </h3>
       </v-col>
 
-      <v-col cols="12" class="d-flex justify-center align-center">
+      <v-col cols="12" class="d-flex align-center justify-center maxHeight">
         <div v-for="(heart, index) in countTry" :key="index" class="hearts-container">
           <v-icon class="heart-icon ml-2" :icon="mdiHeart"></v-icon>
         </div>
       </v-col>
 
-      <v-col cols="12" class="d-flex align-center justify-center">
+      <v-col cols="12" class="d-flex align-center justify-center maxHeight">
           <div
             class="borderChar"
-            v-for="(char, index) in showChars"
+            v-for="(char, index) in arrayChars"
             :key="index"
           >
             <div
@@ -138,10 +128,12 @@ onMounted(() => {
     </v-row>
 
     <div class="container-alphabet">
-      <v-row class="justify-center">
+      <v-row class="d-flex justify-center">
         <v-col
           cols="12"
-          md="8"
+          lg="10"
+          md="11"
+          sm="10"
           class="d-flex flex-wrap justify-center align-center"
         >
           <div class="container-btn" v-for="(alpha, index) in alphabet" :key="index">
@@ -173,21 +165,37 @@ onMounted(() => {
         </v-col>
       </v-row>
     </div>
-
   </v-container>
+
+  <NavBarGame></NavBarGame>
 </template>
 
 <style scoped lang="scss">
 .v-container {
-  height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
+  height: 100vh;
 
-  @media (min-width: 599px) {
-    flex-direction: column;
+  .maxHeight{
+    @media (max-width: 958px) {
+      max-height: 50px !important;
+    }
   }
 
+  .maxHeightRow{
+    @media (max-width: 958px) {
+      max-height: 200px !important;
+    }
+  }
+
+  @media (max-width: 958px) {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+  }
   .heart-icon {
     color: rgb( 175, 26, 80);
   }
@@ -205,6 +213,10 @@ onMounted(() => {
     align-items: center;
     margin: 0 5px;
 
+    @media (max-width: 599px) {
+      width: 22px;
+    }
+
     .char {
       display: flex;
       justify-content: center;
@@ -213,6 +225,10 @@ onMounted(() => {
       width: 35px;
       font-family: 'ABeeZee', sans-serif;
       font-size: 25px;
+
+      @media (max-width: 599px) {
+          width: 20px;
+      }
     }
   }
 
@@ -222,15 +238,29 @@ onMounted(() => {
     align-items: center;
     margin-top: 25px;
 
+    @media (max-width: 599px) {
+
+    }
     .container-btn {
       display: flex;
       justify-content: center;
       align-items: center;
       height: 80px;
       width: 80px;
+
+      @media (max-width: 599px) {
+        height: 40px;
+        width: 20px;
+        margin: 12px;
+      }
+
+      .v-btn {
+        @media (max-width: 958px) {
+          min-width: 0 !important;
+        }
+      }
     }
   }
 }
-
 
 </style>

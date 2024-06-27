@@ -1,7 +1,7 @@
 <script setup>
-import { mdiGithub } from "@mdi/js";
-import { mdiLinkedin } from "@mdi/js";
-import { mdiEmail } from "@mdi/js";
+import {mdiGithub} from "@mdi/js";
+import {mdiLinkedin} from "@mdi/js";
+import {mdiEmail} from "@mdi/js";
 </script>
 
 <template>
@@ -17,7 +17,8 @@ import { mdiEmail } from "@mdi/js";
       </a>
     </li>
     <li>
-      <a href="https://www.linkedin.com/in/ang%C3%A9lique-didillon-76a445257/" target="_blank" rel="noopener noreferrer">
+      <a href="https://www.linkedin.com/in/ang%C3%A9lique-didillon-76a445257/" target="_blank"
+         rel="noopener noreferrer">
         <v-icon :icon="mdiLinkedin"/>
       </a>
     </li>
@@ -30,22 +31,23 @@ import { mdiEmail } from "@mdi/js";
 ul {
   background-color: transparent;
   bottom: 10px;
-  margin-left: 8px;
   z-index: 2;
   list-style: none;
   position: sticky;
 
   li {
-    a{
+    a {
       text-decoration: none;
+
       .v-icon {
-          color: $secondary;
-          font-size: 35px;
-          transition: transform 0.5s ease;
-          &:hover {
-            color: $tertiary;
-            transform: scale(1.3);
-          }
+        color: $secondary;
+        font-size: 35px;
+        transition: transform 0.5s ease;
+
+        &:hover {
+          color: $tertiary;
+          transform: scale(1.3);
+        }
       }
 
     }
