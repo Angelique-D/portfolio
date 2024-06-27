@@ -209,8 +209,7 @@ const isActive = computed(() => xs.value);
 
   .container-timeline {
     padding: 12px;
-    margin: 25px;
-    margin-bottom: 6px;
+    margin: 25px 25px 6px;
     color: whitesmoke;
     background-color: $tertiary;
     align-self: center;
