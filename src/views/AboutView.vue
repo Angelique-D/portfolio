@@ -1,6 +1,6 @@
 <script setup>
 import { ref, computed } from 'vue';
-import { useDisplay } from 'vuetify'
+import { useDisplay } from 'vuetify';
 import Navbar from '@/components/Navbar.vue';
 import Footer from '@/components/Footer.vue';
 import SocialMedia from '@/components/SocialMedia.vue';
@@ -97,37 +97,36 @@ const skills = ref([
     logo: ""
   },
 ]);
-
-const isActive = computed(() => xs.value);
 </script>
 
 <template>
   <Navbar />
-  <v-container fluid>
-    <div class="header-timeline">
-      <v-row class="d-flex justify-center">
-        <v-col cols="8"
-        md="8"
-        sm="12"
-        xs="12"
-        :class="[isActive ? ['minWidth', 'titleh3Underline::after' ] : '']">
-          <v-card :class="[`elevation-${0}`, 'bgPrimary mt-8 mb-8 text-tertiary']">
-            <v-card-title>
-              <h3 class="titleh3Underline mt-5 mb-5">╰┈➤ À propos de moi</h3>
-            </v-card-title>
-            <v-card-text class="text-light style-text">
-              <p>
-                Bonjour, je m'appelle Angélique et je suis développeuse web. Originaire du Canada,
-                j'ai découvert une véritable passion pour le développement web. En 2021, après avoir déménagé en France,
-                j'ai commencé à suivre des cours en ligne sur OpenClassrooms et YouTube.
-                Grâce à ces ressources et à des formations,
-                j'ai pu approfondir mes compétences et transformer cette passion en une carrière professionnelle.
-              </p>
-            </v-card-text>
-          </v-card>
-        </v-col>
-      </v-row>
-    </div>
+  <v-container class="fill-height" fluid>
+    <v-row class="d-flex justify-center">
+      <v-col cols="12"
+      xxl="5"
+      xl="6"
+      lg="8"
+      md="10"
+      :class="[$vuetify.display.xs ? ['minWidth', 'titleh3Underline::after' ] : '']"
+      >
+        <v-card :class="[`elevation-${0}`, 'bgPrimary mt-8 mb-8 text-tertiary']">
+          <v-card-title>
+            <h3 class="titleh3Underline mt-5 mb-5">╰┈➤ À propos de moi</h3>
+          </v-card-title>
+          <v-card-text class="text-light style-text">
+            <p>
+              Bonjour, je m'appelle Angélique et je suis développeuse web. Originaire du Canada,
+              j'ai découvert une véritable passion pour le développement web. En 2021, après avoir déménagé en France,
+              j'ai commencé à suivre des cours en ligne sur OpenClassrooms et YouTube.
+              Grâce à ces ressources et à des formations,
+              j'ai pu approfondir mes compétences et transformer cette passion en une carrière professionnelle.
+            </p>
+          </v-card-text>
+        </v-card>
+      </v-col>
+    </v-row>
+
     <div class="container-timeline">
       <v-timeline direction="horizontal" class="hidden-sm-and-down" style="max-width: 1150px;">
         <v-timeline-item v-for="(year, i) in years" :key="i" size="small">
@@ -154,43 +153,33 @@ const isActive = computed(() => xs.value);
       </v-timeline>
     </div>
 
-    <div class="header-skills">
-      <v-row class="d-flex justify-center">
-        <v-col
-        cols="8"
-        md="8"
-        sm="12"
-        xs="12"
-        :class="[isActive ? ['minWidth', 'titleh3Underline::after' ] : '']">
-          <h3 class="skills-title titleh3Underline mt-15 mb-5">╰┈➤ Mes compétences</h3>
-        </v-col>
-      </v-row>
-    </div>
 
-    <div class="container-myskills d-flex justify-center">
-      <v-row
-      class="d-flex justify-center flex-wrap"
-      style="max-width: 1150px;">
-        <v-col cols="auto" v-for="skill in skills" :key="skill.name"
-          class="d-flex flex-wrap justify-center align-center">
-          <v-card class="d-flex justify-center align-center bgPrimary mt-8 mb-8 text-tertiary cardStyle">
-            <v-card-item class="w-100 h-100">
-              <div class="image">
-                <img
-                :src="skill.logo"
-                :alt="skill.name"
-                class="skill-logo mb-2">
-              </div>
-              <div class="name">
-                <p class="text-center">
-                  {{ skill.name }}
-                </p>
-              </div>
-            </v-card-item>
-          </v-card>
-        </v-col>
-      </v-row>
-    </div>
+    <v-row>
+      <v-col
+      cols="12"
+      :class="[$vuetify.display.xs ? ['minWidth', 'titleh3Underline::after' ] : '']">
+        <h3 class="titleh3Underline mt-15 mb-5">╰┈➤ Mes compétences</h3>
+      </v-col>
+    </v-row>
+
+    <v-row
+    class="d-flex justify-center flex-wrap"
+    style="max-width: 1220px;">
+      <v-col cols="auto" v-for="skill in skills" :key="skill.name">
+        <v-card class="bgPrimary text-tertiary cardStyle">
+          <v-card-item class="d-flex justify-center align-center">
+            <img
+            :src="skill.logo"
+            :alt="skill.name"
+            class="skill-logo">
+          </v-card-item>
+          <v-card-title class="text-center name">
+            {{ skill.name }}
+          </v-card-title>
+        </v-card>
+      </v-col>
+    </v-row>
+
     <SocialMedia />
   </v-container>
   <Footer />
@@ -218,40 +207,38 @@ const isActive = computed(() => xs.value);
       0 6px 6px rgba(0, 0, 0, 0.23);
   }
 
-  .container-myskills {
-    .cardStyle {
-      height: 150px;
-      width: 150px;
-      background-color: $secondary;
-      color: $tertiary;
 
-      @media (max-width: 599px) {
-        width: 85px;
-        height: 85px;
-        font-size: 8px;
-      }
+  .cardStyle {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 140px;
+    width: 130px;
+    background-color: $secondary;
+    color: $tertiary;
 
-      .image {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-
-
-      }
-      .skill-logo {
-        object-fit: cover;
-        max-height: 80px;
-        max-width: 80px;
-
-        @media (max-width: 599px) {
-          max-width: 40px;
-          max-height: 40px;
-        }
-      }
-
-
+    @media (max-width: 599px) {
+      width: 85px;
+      height: 85px;
+      font-size: 8px;
     }
 
+    .name {
+      font-size: 1rem !important;
+      line-height: 0 !important;
+    }
+
+    .skill-logo {
+      object-fit: cover;
+      max-height: 80px;
+      max-width: 80px;
+
+      @media (max-width: 599px) {
+        max-width: 40px;
+        max-height: 40px;
+      }
+    }
   }
 }
 

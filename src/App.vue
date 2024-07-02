@@ -3,9 +3,7 @@
 
 <template>
   <v-app>
-    <div>
-      <router-view />
-    </div>
+    <router-view />
   </v-app>
 </template>
 

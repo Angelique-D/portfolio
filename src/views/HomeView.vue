@@ -1,8 +1,11 @@
 <script setup>
 import { ref } from 'vue';
+import { useDisplay } from 'vuetify';
 import Navbar from '@/components/Navbar.vue';
 import Footer from '@/components/Footer.vue';
 import SocialMedia from '@/components/SocialMedia.vue';
+
+const { md } = useDisplay();
 
 const isOpen = ref(false);
 const setIsOpen = () => {
@@ -12,24 +15,24 @@ const setIsOpen = () => {
 
 <template>
   <Navbar/>
-  <v-container fluid>
-    <div class="head">
+  <v-container class="fill-height" fluid>
       <v-row>
         <v-col
           cols="12"
           md="6"
           class="d-flex align-center justify-center">
-          <div class="font-weight-medium">
+          <div class="container-text">
             <h4>Bienvenue,</h4>
-            <h4>Je m'appelle <span class="myName">Angélique Didillon</span></h4>
-            <h4>Développeuse Web et Web Mobile</h4>
+            <p>Je m'appelle <span class="myName">Angélique Didillon</span></p>
+            <p>Développeuse Web et Web Mobile</p>
           </div>
         </v-col>
 
         <v-col
           cols="12"
           md="6"
-          class="d-flex justify-center">
+          :class="[$vuetify.display.md ? '' : 'mt-5', 'd-flex', 'justify-center']"
+          >
           <div class="container-situation">
             <p @click="setIsOpen" class="mr-12 flex-end">
               <span class="point">.</span>
@@ -68,10 +71,10 @@ const setIsOpen = () => {
           </v-card>
         </v-col>
       </v-row>
-    </div>
+      <SocialMedia style="position: absolute;"/>
   </v-container>
 
-  <SocialMedia style="position: absolute;"/>
+
   <Footer/>
 </template>
 
@@ -83,33 +86,28 @@ const setIsOpen = () => {
   padding: 16px 0;
   font-family: 'ABeeZee', sans-serif;
   background-color: $primary;
+  color: $secondary;
 
-  .head {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    padding: 12px;
-    margin-bottom: 6px;
-    height: 89.7vh;
-    width: 100%;
-    color: $secondary;
 
-    h4 {
-      font-size: 18px;
+ .container-text {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 18px;
+  font-weight: bold;
 
-      .myName {
-        font-family: 'Cookie', handwriting;
-        font-size: 40px;
-      }
-    }
+  .myName {
+    font-family: 'Cookie', handwriting;
+    font-size: 40px;
+  }
+ }
 
-    .container-situation {
-      position: absolute;
-      right: 0;
-      top: 9vh;
-      z-index: 3;
-    }
+
+  .container-situation {
+    position: absolute;
+    right: 0;
+    top: 9vh;
+    z-index: 3;
   }
 
   .point {
