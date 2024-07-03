@@ -37,64 +37,84 @@ const years = ref([
 
 const skills = ref([
   {
+    name: "FIGMA",
+    logo: "figma.png"
+  },
+  {
+    name: "TRELLO",
+    logo: "trello.png"
+  },
+  {
     name: "HTML",
-    logo: "src/assets/img/skills/html.png"
+    logo: "html.png"
   },
   {
     name: "CSS",
-    logo: "src/assets/img/skills/css.png"
+    logo: "css.png"
   },
   {
     name: "JAVASCRIPT",
-    logo: "src/assets/img/skills/js.png"
+    logo: "js.png"
   },
   {
     name: "VUEJS",
-    logo: "src/assets/img/skills/vuejs.png"
+    logo: "vuejs.png"
+  },
+  {
+    name: "TYPESCRIPT",
+    logo: "typescript.png"
+  },
+  {
+    name: "PINIA",
+    logo: "pinia.png"
   },
   {
     name: "PHP",
-    logo: "src/assets/img/skills/php.png"
+    logo: "php.png"
   },
   {
     name: "NODEJS",
-    logo: "src/assets/img/skills/nodejs.png"
+    logo: "nodejs.png"
   },
   {
     name: "NESTJS",
-    logo: "src/assets/img/skills/nestjs.png"
+    logo: "nestjs.png"
   },
   {
     name: "JAVA",
-    logo: "src/assets/img/skills/java.png"
+    logo: "java.png"
   },
   {
     name: "BOOTSTRAP",
-    logo: ""
+    logo: "bootstrap.png"
   },
   {
     name: "VUETIFY",
-    logo: "src/assets/img/skills/vuetify.png"
+    logo: "vuetify.png"
   },
   {
     name: "DBEAVER",
-    logo: "src/assets/img/skills/dbeaver.png"
+    logo: "dbeaver.png"
   },
   {
     name: "MONGODB",
-    logo: "src/assets/img/skills/mongodb.png"
+    logo: "mongodb.png"
   },
   {
     name: "PHPMYADMIN",
-    logo: "src/assets/img/skills/phpmyadmin.png"
+    logo: "phpmyadmin.png"
   },
   {
     name: "PRISMA",
-    logo: "src/assets/img/skills/prisma.png"
+    logo: "prisma.png"
   },
   {
     name: "MONGOOSE",
     logo: ""
+  },
+  {
+    name: "LOOPING",
+    logo: "looping.svg"
   },
 ]);
 </script>
@@ -169,7 +189,7 @@ const skills = ref([
         <v-card class="bgPrimary text-tertiary cardStyle">
           <v-card-item class="d-flex justify-center align-center">
             <img
-            :src="skill.logo"
+            :src="'src/assets/img/skills/' + skill.logo"
             :alt="skill.name"
             class="skill-logo">
           </v-card-item>

@@ -1,11 +1,8 @@
 <script setup>
 import { ref } from 'vue';
-import { useDisplay } from 'vuetify';
 import Navbar from '@/components/Navbar.vue';
 import Footer from '@/components/Footer.vue';
 import SocialMedia from '@/components/SocialMedia.vue';
-
-const { md } = useDisplay();
 
 const isOpen = ref(false);
 const setIsOpen = () => {
@@ -71,7 +68,7 @@ const setIsOpen = () => {
           </v-card>
         </v-col>
       </v-row>
-      <SocialMedia style="position: absolute;"/>
+      <SocialMedia/>
   </v-container>
 
 

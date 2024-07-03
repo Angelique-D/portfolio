@@ -15,7 +15,7 @@ a {
 }
 
 .text-tertiary {
-    color: $tertiary;
+    color: $tertiary !important;
 }
 
 .bgTertiary {
@@ -23,10 +23,6 @@ a {
 }
 
 .text-light {
-    color: $secondary;
-}
-
-.text-secondary {
     color: $secondary;
 }
 
@@ -122,5 +118,10 @@ h3 {
     left: 14px !important;
 }
 
+// Navbar
 
+.v-overlay__content {
+    left: 1270.4px !important;
+    top: 50px !important;
+}
 

@@ -35,7 +35,7 @@ const drawer = ref(false);
     scroll-threshold="100"
     :elevation="0"
   >
-    <router-link to="/">
+    <router-link class="text-light" to="/">
       <v-app-bar-title
         :class="titleClass">
         <p class="firstName">
@@ -81,14 +81,18 @@ const drawer = ref(false);
             v-for="(game, i) in listOfGames"
             :key="i"
           >
-            <v-list-item-title>{{ game.title }}</v-list-item-title>
+            <v-list-item-title class="link">
+              <router-link class="text-tertiary" :to="game.link">
+                {{ game.title }}
+              </router-link>
+            </v-list-item-title>
           </v-list-item>
         </v-list>
       </v-menu>
 
 
       <div class="mr-10 link font-weight-bold">
-        <a href="./src/assets/pdf/CV-AngeliqueDidillon.pdf" download>
+        <a href="./src/assets/pdf/CV-AngeliqueDidillon.pdf" class="text-light" download>
           Mon cv
           <v-icon :icon="mdiDownload"/>
         </a>
@@ -107,7 +111,7 @@ const drawer = ref(false);
     <v-list>
       <v-list-item>
         <v-list-item-title>
-          <router-link to="/about" @click="drawer = false">
+          <router-link to="/about" class="text-light" @click="drawer = false">
             À propos
           </router-link>
         </v-list-item-title>
@@ -115,7 +119,7 @@ const drawer = ref(false);
 
       <v-list-item>
         <v-list-item-title>
-          <router-link to="#" @click="drawer = false">
+          <router-link to="#" class="text-light" @click="drawer = false">
             Mes projets
           </router-link>
         </v-list-item-title>
@@ -137,7 +141,7 @@ const drawer = ref(false);
           class="text-light"
         >
           <v-list-item-title>
-            <router-link to="/hangmangame" @click="drawer = false">
+            <router-link :to="game.link" class="text-light" @click="drawer = false">
               {{ game.title }}
             </router-link>
           </v-list-item-title>
@@ -147,7 +151,7 @@ const drawer = ref(false);
 
       <v-list-item :append-icon="mdiDownload" class="text-white">
         <v-list-item-title>
-          <a href="./src/assets/pdf/CV-AngeliqueDidillon.pdf" download="CV-AngéliqueDidillon" target="_blank"
+          <a href="./src/assets/pdf/CV-AngeliqueDidillon.pdf" class="text-light" download="CV-AngéliqueDidillon" target="_blank"
              @click="drawer = false">
             Mon CV
           </a>
@@ -159,10 +163,6 @@ const drawer = ref(false);
 
 <style scoped lang="scss">
 @import "../styles/settings.scss";
-
-a {
-  color: $secondary;
-}
 
 .title {
   font-family: 'Cookie', handwriting;

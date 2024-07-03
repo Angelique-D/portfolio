@@ -1,12 +1,13 @@
 <script setup>
-import { ref } from 'vue'
-import { mdiRestart, mdiHeart } from "@mdi/js";
+import {ref} from 'vue'
+import {mdiRestart, mdiHeart} from "@mdi/js";
 import words from "@/components/hangmanGame/listOfWords";
 import NavBarGame from "@/components/NavBarGame.vue";
+import SocialMedia from '@/components/SocialMedia.vue';
 
 const alphabet = ref(['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k',
-   'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']);
-const words = ref(['pomme', 'banane', 'poire', 'ananas', 'orange','melon', 'fraise', 'bleuet', 'bébé']);
+  'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']);
+
 const countTry = ref(5);
 const isCharFound = ref(false);
 const nbCharFound = ref(0);
@@ -58,7 +59,7 @@ function handlerBtn(value) {
         toggleCharVisibility(index);
         message.value = "Bravo vous avez gagné !";
         break;
-    } else {
+      } else {
         isCharFound.value = true;
         nbCharFound.value++;
         toggleCharVisibility(index);
@@ -97,7 +98,7 @@ function restart() {
 </script>
 
 <template>
-  <v-container>
+  <v-container class="fill-height" fluid>
     <v-row class="maxHeightRow">
       <v-col cols="12" class="d-flex align-center justify-center maxHeight">
         <h3 class="title ">
@@ -112,18 +113,18 @@ function restart() {
       </v-col>
 
       <v-col cols="12" class="d-flex align-center justify-center maxHeight">
+        <div
+          class="borderChar"
+          v-for="(char, index) in arrayChars"
+          :key="index"
+        >
           <div
-            class="borderChar"
-            v-for="(char, index) in arrayChars"
-            :key="index"
+            class="char"
+            :class="{ hidden: !charVisibility[index] }"
+            ref="char"
           >
-            <div
-              class="char"
-              :class="{ hidden: !charVisibility[index] }"
-              ref="char"
-            >
             {{ char.valueOf() }}
-            </div>
+          </div>
         </div>
       </v-col>
     </v-row>
@@ -132,7 +133,7 @@ function restart() {
       <v-row class="d-flex justify-center">
         <v-col
           cols="12"
-          lg="10"
+          lg="7"
           md="11"
           sm="10"
           class="d-flex flex-wrap justify-center align-center"
@@ -162,13 +163,12 @@ function restart() {
           class="d-flex justify-center align-center"
           v-else
         >
-            {{ message.valueOf() }}
+          {{ message.valueOf() }}
         </v-col>
       </v-row>
     </div>
+    <SocialMedia style="color: black !important;"/>
   </v-container>
-
-  <NavBarGame></NavBarGame>
 </template>
 
 <style scoped lang="scss">
@@ -178,13 +178,13 @@ function restart() {
   align-items: center;
   height: 100vh;
 
-  .maxHeight{
+  .maxHeight {
     @media (max-width: 958px) {
       max-height: 50px !important;
     }
   }
 
-  .maxHeightRow{
+  .maxHeightRow {
     @media (max-width: 958px) {
       max-height: 200px !important;
     }
@@ -197,8 +197,9 @@ function restart() {
     justify-content: center;
     flex-direction: column;
   }
+
   .heart-icon {
-    color: rgb( 175, 26, 80);
+    color: rgb(175, 26, 80);
   }
 
   .hidden {
@@ -228,7 +229,7 @@ function restart() {
       font-size: 25px;
 
       @media (max-width: 599px) {
-          width: 20px;
+        width: 20px;
       }
     }
   }
@@ -242,6 +243,7 @@ function restart() {
     @media (max-width: 599px) {
 
     }
+
     .container-btn {
       display: flex;
       justify-content: center;
@@ -256,7 +258,7 @@ function restart() {
       }
 
       .v-btn {
-        @media (max-width: 958px) {
+        @media (max-width: 599px) {
           min-width: 0 !important;
         }
       }
